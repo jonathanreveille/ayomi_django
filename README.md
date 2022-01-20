@@ -30,7 +30,6 @@ or with Pipenv (on macOS machine) :
 
 ## Launch the project locally
 - ```cd src/```
-- ```python manage.py makemigrations ```
 - ```python manage.py migrate ```
 - ```python manage.py runserver```
 - Open your browser and go to : **localhost:8000/**
