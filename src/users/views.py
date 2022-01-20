@@ -7,7 +7,6 @@ from django.views.generic.edit import FormView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
-
 from .forms import UserRegisterForm, UserUpdateForm
 
 
