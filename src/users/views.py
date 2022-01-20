@@ -1,9 +1,37 @@
+from audioop import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from django.db import transaction
+from django.views.generic.edit import FormView
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
-from .forms import UserForm, ProfileForm
+from .forms import UserRegisterForm, UserUpdateForm
+
+
+class CustomLoginView(LoginView):
+    template_name = "users/login.html"
+    fields = "__all__"
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy('users:home')
+
+
+class RegisterPage(FormView):
+    template_name = 'users/register.html'
+    form_class = UserRegisterForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('users:profile')
+
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(RegisterPage, self).form_valid(form)
 
 
 # Create your views here.
@@ -11,50 +39,20 @@ def home(request):
     return render(request, 'users/home.html')
 
 
-def register(request):
-    """view to register user"""
-
-    if request.method == "POST":
-        form = UserForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
-            # messages.success(request, f'Votre compte a été créé avec \
-            #     succès {username} avec adresse {email}! \
-            #         Vous pouvez maintenant vous connecter')
-            return redirect('profile')
-    else:
-        form = UserForm()
-    return render(request, 'users/register.html', {'form': form})
-
-
-# @login_required
-def profile(request):
-    user = " "
-    context = {
-        "user": user
-    }
-    return render(request, 'users/profile.html', context)
-
-
 @login_required
-@transaction.atomic
-def edit_profile(request):
-
+def profile(request):
     if request.method == "POST":
-        user_form = UserForm(request.POST)
-
-        if user_form.is_valid():
-            user_form.save()
-            return redirect('profile')
-        else:
-            UserForm()
-
+        form = UserUpdateForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            user_update = User.objects.get(username=request.user.username)
+            user_update.email = email
+            user_update.save()
+            return redirect('users:profile')
     else:
-        user_form = UserForm(instance=request.user)
+        form = UserUpdateForm(instance=request.user)
         context = {
-            'user_form': user_form,
+            'form': form,
         }
-        return render(request, 'users/edit_profile.html', context)
+        return render(request, 'users/profile.html', context)
+    return render(request, 'users/profile.html')

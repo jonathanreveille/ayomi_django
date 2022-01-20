@@ -2,7 +2,8 @@
 
 {% load static %}
 
-{% block title %} AYOMI - Register {% endblock title %}
+{% block title %} AYOMI - Login {% endblock title %}
+
 
 {% block content %}
 <div class="container mt-3 mb-3 pt-5 pb-5 px-4 px-lg-5">
@@ -10,16 +11,15 @@
         <div class="col-lg-8">
             <div class="container-fluid message-zone">
                 <div class="column pt-2">
-                <h1> Register </h1>
+                <h1> Log In </h1>
                 <hr>
-                    <form method="POST" class="form-control">
+                    <form method="POST" class="w-auto p-3" >
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <br/>
-                        <input type="Submit" Value="Register"/>
+                        <input type="Submit" Value="Sign in"/>
                     </form>
                     <br>
-                    <p> Already have an account ? <a href="{% url 'users:login' %}"> Login</a></p>
+                    <p>Don't have an account ? <a href="{% url 'users:register' %}"> Register</a></p>
                 </div>
             </div>
         </div>
