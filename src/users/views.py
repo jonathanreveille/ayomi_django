@@ -1,16 +1,19 @@
-from audioop import reverse
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
 from django.db import transaction
-from django.views.generic.edit import FormView
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from django.views.generic.edit import FormView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+
 
 from .forms import UserRegisterForm, UserUpdateForm
 
+
+# Create your views here.
+def home(request):
+    return render(request, 'users/home.html')
 
 class CustomLoginView(LoginView):
     template_name = "users/login.html"
@@ -34,12 +37,8 @@ class RegisterPage(FormView):
         return super(RegisterPage, self).form_valid(form)
 
 
-# Create your views here.
-def home(request):
-    return render(request, 'users/home.html')
-
-
 @login_required
+@transaction.atomic
 def profile(request):
     if request.method == "POST":
         form = UserUpdateForm(request.POST)
