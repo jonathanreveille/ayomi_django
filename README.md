@@ -1,6 +1,5 @@
 ## Ayomi Technical Test
 
-
 In this project :
 - Django Framework version 3.2
 - Python 3.8
@@ -8,30 +7,14 @@ In this project :
 - Oriented Object Programming
 - Docker and Docker-compose
 
-<<<<<<< HEAD
-The aim of the project is to develop a Django app where a user :
-- can create an account
-- can log himself
-- can log out
-- can change his email address from his profile page
-- a modal should appear when we click on 'Update information' button
-
-This project requires also :
-- Dockerfile
-- Docker-compose.yml included
-
-=======
 
 The aim of the project is to develop a Django app where :
-- user can create an account
+- a user can create an account
 - a user can log himself
 - a user can log out
 - a user can change his email address from his profile page
 - a modal should appear when we click on 'Update information' button
-- Dockerfile
-- Docker-compose.yml included
 
->>>>>>> e5262cb2f8f512c3d81776d4b35dbcbf05c92a3d
 
 #### To start the project locally : (TO COMPLETE LATER)
 
