@@ -16,7 +16,7 @@ The aim of the project is to develop a Django app where :
 - a modal should appear when we click on 'Update information' button
 
 
-#### To start the project locally : (TO COMPLETE LATER)
+#### To start the project locally :
 
 Activate virtual environment
 Create your virtual env (Windows Machine):
@@ -24,6 +24,9 @@ Create your virtual env (Windows Machine):
 - ```env\Scripts\Activate```
 - ```pip install -r requirements.txt```
 
+or with Pipenv (on macOS machine) :
+- ```pipenv shell```
+- ```pipenv install -r requirements.txt```
 
 ## Launch the project locally
 - ```cd src/```
