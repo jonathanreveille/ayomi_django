@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %} AYOMI - Welcome ! {% endblock title %}
+
+{% block content %}
+<div class="container mt-3 mb-3 pt-5 pb-5 px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-8">
+            <div class="container-fluid message-zone">
+                <div class="column pt-2">
+                    {% if not request.user.is_authenticated %}
+                    <h3 class="title-home"> Welcome to Ayomi's Technical Test </h3>
+                    {% else %}
+                    <h3 class="title-home"> Welcome to Ayomi's Technical Test </h3>
+                    <p class="title-home"> Click on your profile now in the navigation bar ! </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

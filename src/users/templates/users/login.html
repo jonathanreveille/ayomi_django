@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} AYOMI - Login {% endblock title %}
+
+
+{% block content %}
+<div class="container mt-3 mb-3 pt-5 pb-5 px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-8">
+            <div class="container-fluid message-zone">
+                <div class="column pt-2">
+                <h1> Log In </h1>
+                <hr>
+                    <form method="POST" class="w-auto p-3" >
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="Submit" Value="Sign in"/>
+                    </form>
+                    <br>
+                    <p>Don't have an account ? <a href="{% url 'users:register' %}">Register</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
