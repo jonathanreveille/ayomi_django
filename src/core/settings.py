@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'akjsndkqjsndkjsnrandominsecrurefordevonlyq98123')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get("ENV", "development") == "production" else True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 INSTALLED_APPS = [
@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-
+# Comment for local development - Docker settings in your local_settings.py
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -133,3 +133,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Put custom settings in local_settings.py
+try:
+    from .local_settings import *  # noqa
+except ImportError:
+    pass

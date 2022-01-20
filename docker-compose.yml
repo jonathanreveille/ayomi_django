@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres:9.6
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ayomi"]
+      interval: 3s
+      timeout: 30s
+      retries: 3
+    environment:
+      POSTGRES_DB: ayomi
+      POSTGRES_USER: ayomi
+      POSTGRES_PASSWORD: ayomi
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./src:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      db :
+        condition: service_healthy
