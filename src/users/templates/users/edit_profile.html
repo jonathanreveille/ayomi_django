@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Ayomi - Edit Profile! {% endblock title %}
+
+
+{% block content %}
+    <section class="page-section bg-secondary">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <a class="button-custom" href="{% url 'users:home' %}">Go back</a>
+                    <hr>
+                    <h1>Edit profile</h1>
+                        <form method="post" action="{% url 'users:edit_profile' %}" class="edit_profile" id="edit_profile" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label> {{ user_form.username.label }}</label>
+                            {{user_form.username}}
+                            <br/>
+                            <label> {{ user_form.email.label }}</label>
+                            {{user_form.email}}
+                            <br/>
+                            <label> {{ user_form.first_name.label }}</label>
+                            {{user_form.first_name}}
+                            <br/>
+                            <label> {{ user_form.role.label }}</label>
+                            {{user_form.role}}
+                            <br/>
+                            <label> {{ user_form.host_capacity.label }}</label>
+                            {{user_form.host_capacity}}
+                            <br/>
+                            <label> {{ user_form.location.label }}</label>
+                            {{user_form.location}}
+                            <br/>
+                            {{ user_form.avatar.label }}</label>
+                            {{user_form.avatar}}
+                            <br/>
+                            <label> {{ user_form.postal_code.label }}</label>
+                            {{user_form.postal_code}}
+                            <br/>
+                            <input type="submit" value="Save">
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
