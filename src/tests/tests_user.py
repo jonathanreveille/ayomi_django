@@ -20,6 +20,7 @@ class TestUserApp(TestCase):
         return super().tearDown()
 
     def test_views(self):
+        """Test for reponses status codes"""
         url = reverse('users:logout')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -29,6 +30,7 @@ class TestUserApp(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_if_username_update_email(self):
+        """Test the profile page and the form to update email"""
         url = reverse('users:profile')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

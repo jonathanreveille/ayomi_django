@@ -12,9 +12,12 @@ from .forms import UserRegisterForm, UserUpdateForm
 
 # Create your views here.
 def home(request):
+    """Renders the homepage to the user"""
     return render(request, 'users/home.html')
 
+
 class CustomLoginView(LoginView):
+    """Renders the login view for a user to log in"""
     template_name = "users/login.html"
     fields = "__all__"
     redirect_authenticated_user = True
@@ -24,6 +27,7 @@ class CustomLoginView(LoginView):
 
 
 class RegisterPage(FormView):
+    """Renders the form for a user to register"""
     template_name = 'users/register.html'
     form_class = UserRegisterForm
     redirect_authenticated_user = True
@@ -39,6 +43,12 @@ class RegisterPage(FormView):
 @login_required
 @transaction.atomic
 def profile(request):
+    """
+    This renders the profile page of the user.
+    The form will allow the user to update his email
+    adress
+    """
+
     if request.method == "POST":
         form = UserUpdateForm(request.POST)
         if form.is_valid():
