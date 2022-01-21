@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %} AYOMI - Login {% endblock title %}
 
@@ -12,10 +13,28 @@
                 <div class="column pt-2">
                 <h1> Log In </h1>
                 <hr>
-                    <form method="POST" class="w-auto p-3" >
+                    <form method="POST" novalidate  >
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="Submit" Value="Sign in"/>
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control" %}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                            <input class='btn-primary' type="Submit" Value="Register"/>
+                        </form>
                     </form>
                     <br>
                     <p>Don't have an account ? <a href="{% url 'users:register' %}">Register</a></p>
