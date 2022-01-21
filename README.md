@@ -59,6 +59,12 @@ It will help you to have another DATABASE setting for your container, without po
 You should then  add this piece of code to connect your database for your docker-compose :
 
 ````python
+# local_settings.py
+from pathlib import Path
+
+
+DEBUG = True
+
 # to replace with our own values
 DATABASES = {
     'default': {
@@ -72,6 +78,7 @@ DATABASES = {
 }
 
 # or  with Docker-image, just use for simplicity :
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
