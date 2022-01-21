@@ -29,7 +29,6 @@ class TestUserApp(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-
     def test_if_username_update_email(self):
         url = reverse('users:profile')
         response = self.client.get(url)
