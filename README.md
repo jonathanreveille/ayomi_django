@@ -44,6 +44,11 @@ You should put your own values for the following environment variables :
 * DB_PASS="xxxx"
 
 
+#### Tests
+Go to the directory src/ and then launch in your terminal the command : ```pytest -vvv```
+If you want to customize the test, there is pytest.ini file
+
+
 ## Launch with docker-compose for local development
 If you use Docker, there is a dockerfile and also a  docker-compose file that
 is configured at the root of the project. Make sure you create the database
